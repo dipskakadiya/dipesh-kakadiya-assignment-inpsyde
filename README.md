@@ -3,6 +3,10 @@ Senior Full Stack WordPress Developer assignment for Inpsyde
 
 ## Requirements
 - WordPress 6.1+.
+- Theme Support: Legacy Theme 
+  - Block based theme is currently not supported: 
+      - As per my knowledge handling template for virtual page form plugin is not possible. Possible solution is we need to create page in WordPress backend.
+      - We can create User list as custom Gutenberg block for block based theme. 
 - PHP 8.0 or later, [Composer](https://getcomposer.org) and [Node.js](https://nodejs.org) for dependency management.
 - [Docker](https://docs.docker.com/install/)
 

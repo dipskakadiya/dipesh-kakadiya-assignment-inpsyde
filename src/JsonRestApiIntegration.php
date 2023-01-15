@@ -13,11 +13,14 @@ namespace Inpsyde\JsonRestApiIntegration;
  */
 final class JsonRestApiIntegration
 {
+    private UserPageBuilder $userPageBuilder;
+
     /**
      * WpStash constructor.
      */
     private function __construct()
     {
+        $this->userPageBuilder = new UserPageBuilder();
     }
 
     /**
@@ -39,6 +42,12 @@ final class JsonRestApiIntegration
      */
     public function init(): void
     {
+        register_activation_hook(__DIR__ . 'json-rest-api-integration.php', function () {
+            $this->userPageBuilder->registerPage();
+            flush_rewrite_rules();
+        });
+
+        $this->userPageBuilder->init();
     }
 
     /**
