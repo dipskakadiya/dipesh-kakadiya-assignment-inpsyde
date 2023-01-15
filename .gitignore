@@ -1,0 +1,20 @@
+# ignore everything in the "wordpress" directory, except:
+tools/wordpress
+
+# ignore node dependency directories
+node_modules/
+package-lock.json
+
+# ignore node vendor directories
+vendor/
+composer.lock
+
+# ignore log files and databases
+tmp
+*.log
+*.sql
+*.sqlite
+.phpunit.result.cache
+
+# ignore IDE files
+.idea/
