@@ -9,17 +9,85 @@
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.scss */ "./blocks/user-list-block/style.scss");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./blocks/user-list-block/style.scss");
 /**
  * Block type frontend script definition.
  * It will be enqueued both in the editor and when viewing the content on the front of the site.
  */
 
+
 /**
  * Internal dependencies
  */
 
-const main = async () => {};
+const fetchUserDetail = async userId => {
+  const userDetailPath = `/json_rest/v1/user-detail/` + userId;
+  return await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default()({
+    path: userDetailPath
+  });
+};
+const openUserDetailPopup = () => {
+  openUserDetailLoader();
+  setUserDetailPopupContent("");
+  const popup = document.getElementById("user-detail-popup");
+  popup.classList.remove("hide");
+};
+const closeUserDetailPopup = () => {
+  const popup = document.getElementById("user-detail-popup");
+  popup.classList.add("hide");
+};
+const openUserDetailLoader = () => {
+  const loader = document.getElementById("user-detail-popup-loader");
+  loader.classList.remove("hide");
+};
+const closeUserDetailLoader = () => {
+  const loader = document.getElementById("user-detail-popup-loader");
+  loader.classList.add("hide");
+};
+const setUserDetailPopupContent = html => {
+  // Update popup details.
+  const popupContentElement = document.querySelectorAll("#user-detail-popup .popup-content");
+  if (popupContentElement.length > 0) {
+    popupContentElement[0].innerHTML = html;
+  }
+};
+const handleUserDetailPopup = event => {
+  // Make sure event.target.hash has a value before overriding default behavior
+  const hash = event.target.hash;
+  if (hash !== "") {
+    // Prevent default anchor click behavior
+    event.preventDefault();
+    openUserDetailPopup();
+    fetchUserDetail(hash.replace("#", "")).then(userDetail => {
+      // Update popup details.
+      const popupContentElement = document.querySelectorAll("#user-detail-popup .popup-content");
+      if (popupContentElement.length > 0) {
+        const template = wp.template("user-card");
+        const html = template(userDetail);
+        closeUserDetailLoader();
+        setUserDetailPopupContent(html);
+      }
+    });
+  } // End if
+};
+
+const main = async () => {
+  window.requestIdleCallback(() => {
+    // Handle user detail popup link to show user details.
+    const allUsersTableLinks = document.querySelectorAll("a.user-detail-popup");
+    allUsersTableLinks.forEach(usersTableLink => {
+      usersTableLink.addEventListener("click", handleUserDetailPopup);
+    });
+
+    // Handle user detail popup close event.
+    const popupCloseLink = document.querySelectorAll("#user-detail-popup a.close-popup");
+    if (popupCloseLink.length > 0) {
+      popupCloseLink[0].addEventListener("click", closeUserDetailPopup);
+    }
+  });
+};
 if ("loading" === document.readyState) {
   // The DOM has not yet been loaded.
   document.addEventListener("DOMContentLoaded", main);
@@ -39,6 +107,16 @@ if ("loading" === document.readyState) {
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
+
+/***/ }),
+
+/***/ "@wordpress/api-fetch":
+/*!**********************************!*\
+  !*** external ["wp","apiFetch"] ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["apiFetch"];
 
 /***/ })
 
@@ -103,6 +181,30 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
 /******/ 		};
 /******/ 	})();
 /******/ 	

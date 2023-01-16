@@ -56,6 +56,25 @@ final class JsonRestApiIntegration
         $this->userPageBuilder->init();
         $this->block->init();
         $this->userDetailRest->register();
+
+        add_action('wp_enqueue_scripts', [ $this, 'enqueueScripts' ]);
+        add_action('wp_print_footer_scripts', [ $this, 'loadsJSTemplate' ]);
+    }
+
+    /**
+     * enqueue scripts.
+     */
+    public function enqueueScripts(): void
+    {
+        wp_enqueue_script('wp-util');
+    }
+
+    /**
+     * Load js Template.
+     */
+    public function loadsJSTemplate()
+    {
+        include JsonRestApiIntegration::pathTo('templates/template-users-card.php');
     }
 
     /**

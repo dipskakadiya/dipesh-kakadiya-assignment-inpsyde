@@ -4,14 +4,133 @@
  * and when viewing the content on the front of the site.
  */
 
-table {
+@keyframes rotation {
 
-	width: 100%;
+	from {
+		transform: rotate(0deg);
+	}
 
-	th,
-	td {
-		border: 1px solid;
-		text-align: center;
-		padding: 10px;
+	to {
+		transform: rotate(359deg);
+	}
+}
+
+.user-list {
+	overflow-x: auto;
+
+	table {
+		width: 100%;
+
+		th,
+		td {
+			border: 1px solid;
+			text-align: center;
+			padding: 10px;
+		}
+
+		a {
+			display: block;
+
+			img {
+				pointer-events: none;
+			}
+		}
+	}
+}
+
+.popup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 1000;
+	background: #000000d1;
+
+	&.hide {
+		display: none;
+	}
+
+	.popup-container {
+		position: fixed;
+		top: 55%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 350px;
+		background: #fff;
+
+		@media only screen and (min-width: 728px) {
+			width: 700px;
+		}
+
+		.close-popup {
+			position: relative;
+			float: right;
+			font-size: 30px;
+			margin-right: 10px;
+		}
+	}
+
+	.spinner-container {
+		min-height: 80px;
+		margin: 50px 0 0 30px;
+
+		&.hide {
+			display: none;
+		}
+
+		.spinner {
+			animation: rotation 2s infinite linear;
+			margin: 7px 0 0 0;
+		}
+	}
+}
+
+.card {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	transition: 0.3s;
+	text-align: center;
+
+	&:hover {
+		box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+	}
+
+	img.avatar {
+		max-width: 200px;
+
+		@media only screen and (min-width: 728px) {
+			width: 500px;
+		}
+	}
+
+	.container {
+		font-size: 16px;
+		padding: 15px;
+
+		div,
+		address {
+			margin-bottom: 10px;
+		}
+
+		span {
+			display: inline-block;
+
+			&.dashicons {
+				font-size: 24px;
+				margin-right: 5px;
+			}
+		}
+
+		.card-user--company {
+			font-size: 16px;
+		}
+
+		.card-user--contact {
+			display: flex;
+
+			> div {
+				flex: auto;
+			}
+		}
 	}
 }
