@@ -13,6 +13,6 @@ import Save from "./js/save";
 import "./editor.scss";
 
 registerBlockType(metadata.name, {
-    edit: Edit,
-    save: Save
+  edit: Edit,
+  save: Save
 });

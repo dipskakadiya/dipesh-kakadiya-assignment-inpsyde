@@ -19,25 +19,24 @@ import SettingsPanel from "./edit-settings-panel";
  * @param {Object} props Block properties
  * @return {WPElement} Element to render.
  */
-export default function Edit(props)
-{
-    const { attributes } = props;
+export default function Edit(props) {
+  const { attributes } = props;
 
-    const blockProps = useBlockProps({
-        className: ""
-    });
+  const blockProps = useBlockProps({
+    className: ""
+  });
 
-    return (
-    <  >
+  return (
+    <>
       <SettingsPanel {...props} />
-      <div {...blockProps} >
+      <div {...blockProps}>
         <Disabled>
           <ServerSideRender
-            block = {metadata.name}
-            attributes = {{ ...attributes }}
+            block={metadata.name}
+            attributes={{ ...attributes }}
           />
         </Disabled>
       </div>
     </>
-    );
+  );
 }

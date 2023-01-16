@@ -14,25 +14,24 @@ import metadata from "../block.json";
  * @param {Object} props Block properties
  * @return {WPElement} Element to render.
  */
-export default function SettingsPanel(props)
-{
-    const { attributes, setAttributes } = props;
-    const { title } = attributes;
+export default function SettingsPanel(props) {
+  const { attributes, setAttributes } = props;
+  const { title } = attributes;
 
-    return (
-        <InspectorControls>
-          <PanelBody title = {__("General", metadata.textdomain)}>
-            <PanelRow>
-              <TextControl
-                label = {__("Name:", metadata.textdomain)}
-                help = {__("Enter Name for block.", metadata.textdomain)}
-                value = {title}
-                onChange = {value => {
-                    setAttributes({ title: value });
-                    }}
-              />
-            </PanelRow>
-          </PanelBody>
-        </InspectorControls>
-    );
+  return (
+    <InspectorControls>
+      <PanelBody title={__("General", metadata.textdomain)}>
+        <PanelRow>
+          <TextControl
+            label={__("Name:", metadata.textdomain)}
+            help={__("Enter Name for block.", metadata.textdomain)}
+            value={title}
+            onChange={value => {
+              setAttributes({ title: value });
+            }}
+          />
+        </PanelRow>
+      </PanelBody>
+    </InspectorControls>
+  );
 }
