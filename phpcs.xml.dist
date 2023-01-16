@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <ruleset name="Inpsyde JsonRestApiIntegration">
     <file>./src</file>
+    <file>./blocks</file>
+    <file>./templates</file>
     <config name="text_domain" value="json-rest-api-integration"/>
 
     <!--
@@ -8,6 +10,11 @@
 	See https://github.com/WordPress/WordPress-Coding-Standards/issues/2035
 	-->
     <ini name="error_reporting" value="E_ALL &#38; ~E_DEPRECATED" />
+
+    <rule ref="PSR12">
+        <exclude name="PSR12.Operators.OperatorSpacing.NoSpaceBefore" />
+        <exclude name="PSR12.Operators.OperatorSpacing.NoSpaceAfter" />
+    </rule>
 
     <rule ref="Inpsyde"/>
 </ruleset>

@@ -14,6 +14,7 @@ namespace Inpsyde\JsonRestApiIntegration;
 final class JsonRestApiIntegration
 {
     private UserPageBuilder $userPageBuilder;
+    private BlocksManager $block;
 
     /**
      * WpStash constructor.
@@ -21,6 +22,7 @@ final class JsonRestApiIntegration
     private function __construct()
     {
         $this->userPageBuilder = new UserPageBuilder();
+        $this->block = new BlocksManager();
     }
 
     /**
@@ -48,6 +50,7 @@ final class JsonRestApiIntegration
         });
 
         $this->userPageBuilder->init();
+        $this->block->init();
     }
 
     /**

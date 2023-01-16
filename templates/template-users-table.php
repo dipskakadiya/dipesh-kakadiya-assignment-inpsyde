@@ -1,49 +1,21 @@
 <?php
 
-use \Inpsyde\JsonRestApiIntegration\RestLayer\User\UsersRestCollector;
+declare(strict_types=1);
 
-$usersDataObject = new UsersRestCollector();
-$usersFields     = $usersDataObject->fields();
-$usersData       = $usersDataObject->data();
+# -*- coding: utf-8 -*-
 
 get_header();
 ?>
-	<article <?php post_class(); ?>>
-		<header class="entry-header alignwide">
-			<h1 class="entry-title">User Lists</h1>
-		</header>
-		<div class="entry-content">
-			<table>
-				<thead>
-				<tr>
-					<?php foreach ( $usersFields as $field => $fieldLabel ) { ?>
-						<th><?php echo esc_html( $fieldLabel ); ?></th>
-					<?php } ?>
-				</tr>
-				</thead>
-				<tbody>
-				<?php foreach ( $usersData['users'] as $user ) { ?>
-					<tr>
-						<?php foreach ( $usersFields as $field => $fieldLabel ) { ?>
-							<td>
-								<?php
-								if ( in_array( $field, [ 'id', 'name', 'username' ], true ) ) {
-									?>
-									<a href="#"
-										data-id="<?php echo esc_attr( $user->__get( 'id' ) ); ?>"><?php echo esc_html( $user->__get( $field ) ); ?></a>
-									<?php
-								} else {
-									echo esc_html( $user->__get( $field ) );
-								}
-								?>
-							</td>
-						<?php } ?>
-					</tr>
-				<?php } ?>
-				</tbody>
-			</table>
-		</div>
-	</article>
+    <article <?php post_class(); ?>>
+        <header class="entry-header alignwide">
+            <h1 class="entry-title"><?php esc_html_e('User Lists', 'json-rest-api-integration'); ?></h1>
+        </header>
+        <div class="entry-content">
+            <?php echo wp_kses_post(
+                do_blocks('<!-- wp:inpsyde-blocks/user-list-block /-->')
+            ); ?>
+        </div>
+    </article>
 
 <?php
 get_footer();

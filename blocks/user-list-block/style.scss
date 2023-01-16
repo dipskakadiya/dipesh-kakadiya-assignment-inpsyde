@@ -1,0 +1,17 @@
+/**
+ * Block type frontend style definition.
+ * It will be enqueued both in the editor and
+ * and when viewing the content on the front of the site.
+ */
+
+table {
+
+	width: 100%;
+
+	th,
+	td {
+		border: 1px solid;
+		text-align: center;
+		padding: 10px;
+	}
+}

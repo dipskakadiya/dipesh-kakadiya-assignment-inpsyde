@@ -37,6 +37,10 @@ class UsersRestCollector implements ExternalRestCollectorInterface
 
     /**
      * Prepare Users data.
+     *
+     * @param array $users Users details.
+     *
+     * @return array
      */
     public function preparedUsers(array $users): array
     {
@@ -44,13 +48,12 @@ class UsersRestCollector implements ExternalRestCollectorInterface
         foreach ($users as $user) {
             $userData = new UserDataCollector($user->id);
             $userData->__set('name', $user->name);
+            $userData->__set(
+                'avatar',
+                'https://avatars.dicebear.com/v2/avataaars/' . $user->username . '.svg'
+            );
             $userData->__set('username', $user->username);
             $userData->__set('email', $user->email);
-            $userData->__set(
-                'address',
-                $user->address->street . ', ' . $user->address->suite .
-                ', ' . $user->address->city . ', ' . $user->address->zipcode
-            );
             $data[] = $userData;
         }
 
@@ -64,10 +67,10 @@ class UsersRestCollector implements ExternalRestCollectorInterface
     {
         return [
             'id' => __('ID', 'json-rest-api-integration'),
+            'avatar' => __('Avatar', 'json-rest-api-integration'),
             'name' => __('Name', 'json-rest-api-integration'),
             'username' => __('Username', 'json-rest-api-integration'),
             'email' => __('Email', 'json-rest-api-integration'),
-            'address' => __('Address', 'json-rest-api-integration'),
         ];
     }
 }

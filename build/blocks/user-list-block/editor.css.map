@@ -1,0 +1,1 @@
+{"version":3,"file":"user-list-block/editor.css","mappings":";;;AAAA;;;EAAA,C","sources":["webpack://@inpsyde/json-rest-api-integration/./blocks/user-list-block/editor.scss"],"sourcesContent":["/**\n * Block type editor style definition.\n * It will only be enqueued in the context of the editor.\n */\n.editor-styles-wrapper {}\n"],"names":[],"sourceRoot":""}
