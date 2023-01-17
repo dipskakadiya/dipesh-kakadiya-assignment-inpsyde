@@ -15,9 +15,9 @@ use Inpsyde\JsonRestApiIntegration\RestLayer\User\UserDetailRestCollector;
  */
 final class JsonRestApiIntegration
 {
-    private UserPageBuilder $userPageBuilder;
-    private BlocksManager $block;
-    private UserDetailRestCollector $userDetailRest;
+    public UserPageBuilder $userPageBuilder;
+    public BlocksManager $block;
+    public UserDetailRestCollector $userDetailRest;
 
     /**
      * WpStash constructor.

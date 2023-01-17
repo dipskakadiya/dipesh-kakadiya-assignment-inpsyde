@@ -19,7 +19,7 @@ final class BlocksManager
     public function init(): void
     {
         add_action('init', [ $this, 'registerBlocks' ]);
-        add_filter('block_categories_all', [ $this, 'registerBlockCategory' ], 10);
+        add_filter('block_categories_all', [ $this, 'registerBlockCategory' ]);
     }
 
     /**

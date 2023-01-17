@@ -49,6 +49,16 @@ class UserDetailRestCollectorTest extends AbstractTestCase
     /**
      * @test
      */
+    public function testRegister(): void
+    {
+        $testee = new UserDetailRestCollector();
+        $testee->register();
+        self::assertNotFalse(has_action('rest_api_init', [ $testee, 'registerRestRoute' ]));
+    }
+
+    /**
+     * @test
+     */
     public function testData(): void
     {
         Functions\stubs([
