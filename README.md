@@ -64,6 +64,6 @@ which will make it available at [localhost:8888](http://localhost:8888/). Ensure
 
 Local environment **WordPress credentials**: 
 - Username: `admin`
-- Password: `admin`
+- Password: `password`
 
 `wp-env` detail information: [Documentation](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/)
