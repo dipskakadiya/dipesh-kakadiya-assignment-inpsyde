@@ -34,7 +34,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Inpsyde\\WpStash\\Tests\\Unit\\": "tests/PHPUnit/Unit/"
+      "Inpsyde\\JsonRestApiIntegration\\Tests\\Unit\\": "tests/PHPUnit/Unit/"
     }
   },
   "scripts": {
