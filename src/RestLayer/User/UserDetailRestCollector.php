@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Inpsyde\JsonRestApiIntegration\RestLayer\User;
 
+use Inpsyde\JsonRestApiIntegration\CacheManager;
 use Inpsyde\JsonRestApiIntegration\DataLayer\User\UserDataCollector;
 use Inpsyde\JsonRestApiIntegration\RestLayer\ExternalRestCollectorInterface;
 use Inpsyde\JsonRestApiIntegration\RestLayer\RestCollectorInterface;
@@ -72,6 +73,11 @@ class UserDetailRestCollector implements RestCollectorInterface, ExternalRestCol
      */
     public function data(int $userId = 0): array
     {
+        $data = CacheManager::get((string)$userId);
+        if (false !== $data) {
+            return $data;
+        }
+
         $data = [];
 
         if (empty($userId)) {
@@ -87,6 +93,8 @@ class UserDetailRestCollector implements RestCollectorInterface, ExternalRestCol
             } catch (Exception $ex) {
             }
         }
+
+        CacheManager::set((string)$userId, $data);
 
         return $data;
     }

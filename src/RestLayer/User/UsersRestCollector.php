@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Inpsyde\JsonRestApiIntegration\RestLayer\User;
 
+use Inpsyde\JsonRestApiIntegration\CacheManager;
 use Inpsyde\JsonRestApiIntegration\DataLayer\User\UserDataCollector;
 use Inpsyde\JsonRestApiIntegration\RestLayer\ExternalRestCollectorInterface;
 use Exception;
@@ -22,6 +23,11 @@ class UsersRestCollector implements ExternalRestCollectorInterface
      */
     public function data(): array
     {
+        $data = CacheManager::get('all');
+        if (false !== $data) {
+            return [ 'users' => $data ];
+        }
+
         $data = [];
         $request = wp_remote_get(self::REST__ENDPOINT);
         if (is_array($request) && ! is_wp_error($request)) {
@@ -31,6 +37,8 @@ class UsersRestCollector implements ExternalRestCollectorInterface
             } catch (Exception $ex) {
             }
         }
+
+        CacheManager::set('all', $data, 1800);
 
         return [ 'users' => $data ];
     }

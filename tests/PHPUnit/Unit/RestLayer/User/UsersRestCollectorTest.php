@@ -65,6 +65,12 @@ class UsersRestCollectorTest extends AbstractTestCase
                     'body' => null,
                 ];
             },
+            'wp_cache_get'=> static function (): mixed {
+                return false;
+            },
+            'wp_cache_set'=> static function (): bool {
+                return true;
+            },
             'wp_remote_retrieve_body'=> self::usersJsonData(),
             '__',
         ]);
@@ -81,6 +87,23 @@ class UsersRestCollectorTest extends AbstractTestCase
             'https://avatars.dicebear.com/v2/avataaars/Bret.svg',
             $usersData['users'][0]->__get('avatar')
         );
+
+        // Cache result test case.
+        Functions\stubs([
+            'wp_cache_get'=> static function (): mixed {
+                $user = new UserDataCollector(1);
+                $user->__set('name', 'Loren Stash');
+                $user->__set('username', 'Lorn');
+                return [
+                    $user,
+                ];
+            },
+        ]);
+        $usersData = $testee->data();
+        static::assertIsArray($usersData);
+        static::assertInstanceOf(UserDataCollector::class, $usersData['users'][0]);
+        static::assertEquals('Loren Stash', $usersData['users'][0]->__get('name'));
+        static::assertEquals('Lorn', $usersData['users'][0]->__get('username'));
     }
 
     /**
