@@ -35,7 +35,7 @@ We suggest using a software package manager for installing the development depen
 1. Clone the plugin repository.
 
 
-2. Composer install 
+2. install Composer dependencies.
 
    	composer install
 
@@ -62,6 +62,8 @@ To stop local environment, run:
 
 which will make it available at [localhost:8888](http://localhost:8888/). Ensure that no other Docker containers or services are using port 8888 on your machine.
 
-Local env WordPress credentials: Username: `admin` and Password: `admin`
+Local environment **WordPress credentials**: 
+- Username: `admin`
+- Password: `admin`
 
 `wp-env` detail information: [Documentation](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/)
